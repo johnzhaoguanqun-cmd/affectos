@@ -33,7 +33,7 @@ body {
 }
 
 .app {
-  width: min(1320px, 100%);
+  width: min(1480px, 100%);
   margin: 0 auto;
   border: 1px solid var(--line);
   border-radius: 22px;
@@ -187,8 +187,8 @@ body {
 .layout {
   padding: 0.35rem 1rem 1rem;
   display: grid;
-  grid-template-columns: 1.68fr 1.08fr;
-  gap: 0.85rem;
+  grid-template-columns: minmax(0, 1.55fr) minmax(380px, 1fr);
+  gap: 1rem;
 }
 
 .feed-panel {
@@ -237,7 +237,7 @@ body {
 }
 
 .feed-grid {
-  padding: 0.85rem;
+  padding: 1rem;
   background: linear-gradient(180deg, #f9fcff 0%, #f4f8ff 100%);
   display: grid;
   gap: 0.78rem;
@@ -250,7 +250,7 @@ body {
   border: 1px solid var(--line);
   border-radius: 14px;
   background: #fff;
-  padding: 0.78rem;
+  padding: 0.9rem;
   display: grid;
   gap: 0.54rem;
   box-shadow: 0 10px 25px rgba(39, 66, 113, 0.09);
@@ -346,49 +346,20 @@ body {
   border: 1px solid var(--line);
   border-radius: 12px;
   overflow: hidden;
-  height: 220px;
+  height: 230px;
   background: linear-gradient(145deg, #a8e9ff, #8ea6ff 52%, #ffb6c4);
 }
 
-.post-media.has-video video {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  background: #dce9ff;
-}
-
-.post-media.has-image img {
+.post-media.has-image img,
+.post-media.has-gif img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
 }
 
-.media-fallback {
-  position: absolute;
-  inset: 0;
-  display: none;
-  place-items: center;
-  text-align: center;
-  padding: 1rem;
-  color: #fff;
-  font-weight: 700;
-  background:
-    linear-gradient(160deg, rgba(26, 35, 54, 0.4), rgba(15, 22, 37, 0.62)),
-    linear-gradient(145deg, #7f8fff, #34d4ff 45%, #ff7f9c);
-}
-
-.post-media.video-error .media-fallback {
-  display: grid;
-}
-
-.post-media.video-error video {
-  display: none;
-}
-
-.post-media.video-error img {
-  display: none;
+.post-media.has-gradient {
+  isolation: isolate;
 }
 
 .media-top-tag {
@@ -407,30 +378,6 @@ body {
   font-weight: 700;
 }
 
-.media-play-btn {
-  position: absolute;
-  z-index: 2;
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  border: 1px solid rgba(26, 43, 71, 0.25);
-  background: rgba(255, 255, 255, 0.84);
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  cursor: pointer;
-  display: grid;
-  place-items: center;
-}
-
-.media-play-btn::before {
-  content: "";
-  margin-left: 4px;
-  border-top: 10px solid transparent;
-  border-bottom: 10px solid transparent;
-  border-left: 16px solid #2a3e5e;
-}
-
 .media-overlay {
   pointer-events: none;
   position: absolute;
@@ -444,6 +391,7 @@ body {
   color: #243757;
   line-height: 1.36;
   overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .why-tag {
@@ -456,6 +404,7 @@ body {
   border-radius: 10px;
   padding: 0.28rem 0.42rem;
   overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .post-actions {
@@ -550,8 +499,9 @@ body {
 
 .right-column {
   display: grid;
-  gap: 0.72rem;
+  gap: 0.85rem;
   align-content: start;
+  min-width: 0;
 }
 
 .system-only {
@@ -565,7 +515,8 @@ body {
 .metric-list,
 .metric-stack {
   display: grid;
-  gap: 0.42rem;
+  gap: 0.48rem;
+  min-width: 0;
 }
 
 .metric-item,
@@ -573,10 +524,12 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 0.6rem;
-  font-size: 0.79rem;
+  gap: 0.75rem;
+  font-size: 0.84rem;
   border-bottom: 1px dashed #d9e7ff;
-  padding: 0.26rem 0;
+  padding: 0.34rem 0;
+  min-width: 0;
+  box-sizing: border-box;
 }
 
 .metric-item:last-child,
@@ -586,11 +539,18 @@ body {
 
 .metric-label {
   color: #5e769c;
+  min-width: 0;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .metric-value {
   color: #2f4568;
   font-weight: 700;
+  text-align: right;
+  min-width: 0;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .metric-pill {
@@ -603,6 +563,7 @@ body {
   padding: 0.2rem 0.44rem;
   color: #334d73;
   background: #f5f9ff;
+  white-space: nowrap;
 }
 
 .meter {
@@ -635,9 +596,11 @@ body {
   background: #fff3ea;
   border-radius: 10px;
   color: #955123;
-  font-size: 0.74rem;
-  line-height: 1.37;
-  padding: 0.4rem 0.52rem;
+  font-size: 0.8rem;
+  line-height: 1.45;
+  padding: 0.58rem 0.72rem;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .api-only-label {
@@ -660,10 +623,13 @@ body {
   border-radius: 12px;
   background: #f7fbff;
   color: #2e4469;
-  min-height: 92px;
-  padding: 0.56rem;
-  line-height: 1.45;
-  font-size: 0.74rem;
+  min-height: 118px;
+  padding: 0.8rem 0.9rem;
+  line-height: 1.55;
+  font-size: 0.86rem;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  box-sizing: border-box;
 }
 
 .loop-diagram {
@@ -689,6 +655,55 @@ body {
   letter-spacing: 0.04em;
   padding: 0.25rem;
   font-weight: 700;
+}
+
+.right-column .panel {
+  padding: 0.95rem 1rem;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+.right-column .panel .panel-title-row {
+  margin-bottom: 0.42rem;
+}
+
+.post-media.media-error::before {
+  content: "Visual unavailable";
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  color: #ffffff;
+  font-size: 0.92rem;
+  font-weight: 700;
+  background:
+    linear-gradient(160deg, rgba(19, 29, 46, 0.58), rgba(16, 25, 39, 0.7)),
+    linear-gradient(145deg, #7f8fff, #34d4ff 45%, #ff7f9c);
+  z-index: 3;
+}
+
+.gradient-pulse {
+  background:
+    radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.28), transparent 35%),
+    linear-gradient(120deg, #8de4ff, #8fa7ff, #ffb9cb, #8de4ff);
+  background-size: 220% 220%;
+  animation: pulseGradient 8s ease infinite;
+}
+
+.gradient-wave {
+  background:
+    radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.25), transparent 30%),
+    linear-gradient(145deg, #9beaff, #9adfc2, #aac8ff, #9beaff);
+  background-size: 240% 240%;
+  animation: pulseGradient 9s ease infinite reverse;
+}
+
+.gradient-signal {
+  background:
+    radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.2), transparent 38%),
+    linear-gradient(135deg, #ffb3c3, #b594ff, #86e8ff, #ffb3c3);
+  background-size: 250% 250%;
+  animation: pulseGradient 7s ease infinite;
 }
 
 .n1 { top: 6px; left: 50%; transform: translateX(-50%); }
@@ -739,6 +754,12 @@ body {
     opacity: 1;
     transform: translateY(0) scale(1);
   }
+}
+
+@keyframes pulseGradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 @media (max-width: 1150px) {
@@ -793,5 +814,13 @@ body {
 
   .action-row {
     justify-content: space-between;
+  }
+
+  .right-column .panel {
+    padding: 0.85rem;
+  }
+
+  .analysis-box {
+    font-size: 0.82rem;
   }
 }

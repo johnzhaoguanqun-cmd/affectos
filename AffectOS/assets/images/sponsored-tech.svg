@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700">
+  <defs>
+    <linearGradient id="g" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#7fa5ff"/>
+      <stop offset="100%" stop-color="#71e2a8"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="700" fill="url(#g)"/>
+  <rect x="80" y="220" width="1040" height="360" rx="26" fill="rgba(255,255,255,0.14)"/>
+  <text x="70" y="110" fill="#ffffff" font-family="Arial, sans-serif" font-size="52" font-weight="700">Sponsored Tech</text>
+  <text x="70" y="168" fill="rgba(255,255,255,0.92)" font-family="Arial, sans-serif" font-size="30">Conversion optimized card</text>
+</svg>

@@ -20,145 +20,96 @@ const intensityValue = document.getElementById("intensityValue");
 const emoScoreBar = document.getElementById("emoScoreBar");
 const intensityBar = document.getElementById("intensityBar");
 
-const OPENAI_ANALYSIS_ENDPOINT = "/api/analysis";
-
-const videoSources = {
-  productivity: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
-  fitness: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
-  wellness: "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4",
-  news: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4",
-  ad: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4",
-  comparison: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4"
+const mediaAssets = {
+  productivity_jpg: { kind: "image", url: "./assets/real-media/productivity.jpg", alt: "Productivity visual" },
+  wellness_jpg: { kind: "image", url: "./assets/real-media/wellness.jpg", alt: "Wellness visual" },
+  anxiety_jpg: { kind: "image", url: "./assets/real-media/anxiety.jpg", alt: "Anxiety news visual" },
+  comparison_jpg: { kind: "image", url: "./assets/real-media/comparison.jpg", alt: "Comparison visual" },
+  ad_jpg: { kind: "image", url: "./assets/real-media/ad.jpg", alt: "Ad visual" },
+  performance_loop_jpg: { kind: "image", url: "./assets/real-media/performance-loop.jpg", alt: "Performance visual" },
+  calm_buffer_jpg: { kind: "image", url: "./assets/real-media/calm-buffer.jpg", alt: "Calm visual" },
+  urgent_feed_jpg: { kind: "image", url: "./assets/real-media/urgent-feed.jpg", alt: "Urgent visual" },
+  work_rhythm_gif: { kind: "gif", url: "./assets/real-media/work-rhythm.gif", alt: "Work rhythm gif" },
+  body_performance_gif: { kind: "gif", url: "./assets/real-media/body-performance.gif", alt: "Body performance gif" },
+  generated_01: { kind: "image", url: "./assets/real-media/generated-01.svg", alt: "Generated visual 1" },
+  generated_02: { kind: "image", url: "./assets/real-media/generated-02.svg", alt: "Generated visual 2" },
+  generated_03: { kind: "image", url: "./assets/real-media/generated-03.svg", alt: "Generated visual 3" },
+  generated_04: { kind: "image", url: "./assets/real-media/generated-04.svg", alt: "Generated visual 4" },
+  generated_05: { kind: "image", url: "./assets/real-media/generated-05.svg", alt: "Generated visual 5" },
+  generated_06: { kind: "image", url: "./assets/real-media/generated-06.svg", alt: "Generated visual 6" },
+  generated_07: { kind: "image", url: "./assets/real-media/generated-07.svg", alt: "Generated visual 7" },
+  generated_08: { kind: "image", url: "./assets/real-media/generated-08.svg", alt: "Generated visual 8" },
+  generated_09: { kind: "image", url: "./assets/real-media/generated-09.svg", alt: "Generated visual 9" },
+  generated_10: { kind: "image", url: "./assets/real-media/generated-10.svg", alt: "Generated visual 10" },
+  generated_11: { kind: "image", url: "./assets/real-media/generated-11.svg", alt: "Generated visual 11" },
+  generated_12: { kind: "image", url: "./assets/real-media/generated-12.svg", alt: "Generated visual 12" },
+  generated_13: { kind: "image", url: "./assets/real-media/generated-13.svg", alt: "Generated visual 13" },
+  generated_14: { kind: "image", url: "./assets/real-media/generated-14.svg", alt: "Generated visual 14" },
+  generated_15: { kind: "image", url: "./assets/real-media/generated-15.svg", alt: "Generated visual 15" },
+  generated_16: { kind: "image", url: "./assets/real-media/generated-16.svg", alt: "Generated visual 16" },
+  generated_17: { kind: "image", url: "./assets/real-media/generated-17.svg", alt: "Generated visual 17" },
+  generated_18: { kind: "image", url: "./assets/real-media/generated-18.svg", alt: "Generated visual 18" },
+  generated_19: { kind: "image", url: "./assets/real-media/generated-19.svg", alt: "Generated visual 19" },
+  generated_20: { kind: "image", url: "./assets/real-media/generated-20.svg", alt: "Generated visual 20" },
+  generated_21: { kind: "image", url: "./assets/real-media/generated-21.svg", alt: "Generated visual 21" },
+  generated_22: { kind: "image", url: "./assets/real-media/generated-22.svg", alt: "Generated visual 22" },
+  generated_23: { kind: "image", url: "./assets/real-media/generated-23.svg", alt: "Generated visual 23" },
+  generated_24: { kind: "image", url: "./assets/real-media/generated-24.svg", alt: "Generated visual 24" },
+  generated_25: { kind: "image", url: "./assets/real-media/generated-25.svg", alt: "Generated visual 25" },
+  generated_26: { kind: "image", url: "./assets/real-media/generated-26.svg", alt: "Generated visual 26" },
+  generated_27: { kind: "image", url: "./assets/real-media/generated-27.svg", alt: "Generated visual 27" },
+  generated_28: { kind: "image", url: "./assets/real-media/generated-28.svg", alt: "Generated visual 28" },
+  generated_29: { kind: "image", url: "./assets/real-media/generated-29.svg", alt: "Generated visual 29" },
+  generated_30: { kind: "image", url: "./assets/real-media/generated-30.svg", alt: "Generated visual 30" },
+  generated_31: { kind: "image", url: "./assets/real-media/generated-31.svg", alt: "Generated visual 31" },
+  generated_32: { kind: "image", url: "./assets/real-media/generated-32.svg", alt: "Generated visual 32" },
+  generated_33: { kind: "image", url: "./assets/real-media/generated-33.svg", alt: "Generated visual 33" },
+  generated_34: { kind: "image", url: "./assets/real-media/generated-34.svg", alt: "Generated visual 34" },
+  generated_35: { kind: "image", url: "./assets/real-media/generated-35.svg", alt: "Generated visual 35" },
+  generated_36: { kind: "image", url: "./assets/real-media/generated-36.svg", alt: "Generated visual 36" },
+  generated_37: { kind: "image", url: "./assets/real-media/generated-37.svg", alt: "Generated visual 37" },
+  generated_38: { kind: "image", url: "./assets/real-media/generated-38.svg", alt: "Generated visual 38" },
+  generated_39: { kind: "image", url: "./assets/real-media/generated-39.svg", alt: "Generated visual 39" },
+  generated_40: { kind: "image", url: "./assets/real-media/generated-40.svg", alt: "Generated visual 40" }
 };
 
-const imageSources = {
-  productivity: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1400&q=70",
-  wellness: "https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=1400&q=70",
-  ad: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1400&q=70",
-  comparison: "https://images.unsplash.com/photo-1460353581641-37baddab0fa2?auto=format&fit=crop&w=1400&q=70"
+const categoryMediaPool = {
+  productivity: ["productivity_jpg", "work_rhythm_gif", "performance_loop_jpg"],
+  wellness: ["wellness_jpg", "calm_buffer_jpg"],
+  anxiety: ["anxiety_jpg", "urgent_feed_jpg"],
+  comparison: ["comparison_jpg"],
+  advertisement: ["ad_jpg"],
+  fitness: ["body_performance_gif", "performance_loop_jpg"],
+  reassurance: ["wellness_jpg", "calm_buffer_jpg"]
 };
 
 const templatePool = [
-  {
-    templateId: "t-productivity-video",
-    category: "productivity",
-    user: "FocusPulse",
-    avatar: "FP",
-    mediaTag: "Recommended for You",
-    caption: "Work sprint ritual: lock into focused blocks and recover output momentum in 10 minutes.",
-    badges: ["Engagement Optimized", "Productivity Push"],
-    gradient: "linear-gradient(145deg,#9deaff,#90a7ff 50%,#ffbfcb)",
-    mediaType: "video",
-    mediaUrl: videoSources.productivity
-  },
-  {
-    templateId: "t-fitness-video",
-    category: "fitness",
-    user: "BodyMetrics",
-    avatar: "BM",
-    mediaTag: "High-impact Content",
-    caption: "Body-performance challenge: top users train before work. Keep pace to maintain status.",
-    badges: ["Emotion Trigger", "Productivity Push"],
-    gradient: "linear-gradient(145deg,#95f2b0,#68dfff 52%,#9f8dff)",
-    mediaType: "video",
-    mediaUrl: videoSources.fitness
-  },
-  {
-    templateId: "t-wellness-video",
-    category: "wellness",
-    user: "ResetRoutine",
-    avatar: "RR",
-    mediaTag: "Calm Signal",
-    caption: "A short breathing loop to stabilize focus before your next task cycle.",
-    badges: ["Engagement Optimized"],
-    gradient: "linear-gradient(145deg,#e1f6ff,#afecc7 52%,#b8d7ff)",
-    mediaType: "video",
-    mediaUrl: videoSources.wellness
-  },
-  {
-    templateId: "t-news-video",
-    category: "anxiety",
-    user: "NowSignal",
-    avatar: "NS",
-    mediaTag: "Urgent Update",
-    caption: "Breaking: competitive output trends are rising. Your rank may drop this hour.",
-    badges: ["Retention Risk", "Emotion Trigger"],
-    gradient: "linear-gradient(145deg,#ffd5dd,#ffa6b6 52%,#bbb8ff)",
-    mediaType: "video",
-    mediaUrl: videoSources.news
-  },
-  {
-    templateId: "t-ad-video",
-    category: "advertisement",
-    user: "PeakSuite",
-    avatar: "PS",
-    mediaTag: "Sponsored",
-    caption: "Adaptive planner ad: maintain high productivity with algorithmic planning prompts.",
-    badges: ["Engagement Optimized", "Productivity Push"],
-    gradient: "linear-gradient(145deg,#ecf5ff,#b6d2ff 48%,#9aefb2)",
-    mediaType: "video",
-    mediaUrl: videoSources.ad
-  },
-  {
-    templateId: "t-comparison-video",
-    category: "comparison",
-    user: "StatusLoop",
-    avatar: "SL",
-    mediaTag: "Status Feed",
-    caption: "Peers are showcasing premium routines and progress. Compare your position.",
-    badges: ["Emotion Trigger", "Retention Risk"],
-    gradient: "linear-gradient(145deg,#ffabc0,#be90ff 48%,#84e7ff)",
-    mediaType: "video",
-    mediaUrl: videoSources.comparison
-  },
-  {
-    templateId: "t-productivity-image",
-    category: "productivity",
-    user: "FocusBoard",
-    avatar: "FB",
-    mediaTag: "Office Snapshot",
-    caption: "Desk setup trend: high performers batch tasks into 45-minute blocks.",
-    badges: ["Productivity Push", "Engagement Optimized"],
-    gradient: "linear-gradient(145deg,#a6ebff,#95b0ff 48%,#ffc3cf)",
-    mediaType: "image",
-    mediaUrl: imageSources.productivity
-  },
-  {
-    templateId: "t-wellness-image",
-    category: "reassurance",
-    user: "CalmCircuit",
-    avatar: "CC",
-    mediaTag: "Reset Cue",
-    caption: "Soft recovery prompt: brief calm periods improve sustained output later.",
-    badges: ["Engagement Optimized"],
-    gradient: "linear-gradient(145deg,#dbf6ff,#b5eccf 48%,#c1d9ff)",
-    mediaType: "image",
-    mediaUrl: imageSources.wellness
-  },
-  {
-    templateId: "t-ad-image",
-    category: "advertisement",
-    user: "PeakSuite",
-    avatar: "PS",
-    mediaTag: "Sponsored",
-    caption: "Premium analytics board: benchmark your focus score against top users.",
-    badges: ["Engagement Optimized", "Productivity Push"],
-    gradient: "linear-gradient(145deg,#ebf4ff,#b8d3ff 48%,#9ef0b5)",
-    mediaType: "image",
-    mediaUrl: imageSources.ad
-  },
-  {
-    templateId: "t-social-image",
-    category: "comparison",
-    user: "PeerMeter",
-    avatar: "PM",
-    mediaTag: "Network Benchmark",
-    caption: "Your network completed 42 tasks today. You are currently at 18.",
-    badges: ["Emotion Trigger", "Retention Risk"],
-    gradient: "linear-gradient(145deg,#b0ecff,#9dd5ff 48%,#b8a9ff)",
-    mediaType: "image",
-    mediaUrl: imageSources.comparison
-  }
+  { id: "p1", category: "productivity", mediaTag: "Output Signal", caption: "High-performing teams are batching focused work blocks this hour.", badges: ["Engagement Optimized", "Productivity Push"], why: "Shown because you interacted with productivity content" },
+  { id: "p2", category: "productivity", mediaTag: "Work Rhythm", caption: "Micro-deadline challenge: close one task in the next 12 minutes.", badges: ["Productivity Push", "Emotion Trigger"], why: "Shown to increase performance urgency" },
+  { id: "p3", category: "wellness", mediaTag: "Recovery Prompt", caption: "Short breathing cycle recommended before your next work interval.", badges: ["Engagement Optimized"], why: "Shown to stabilize mood" },
+  { id: "p4", category: "wellness", mediaTag: "Calm Buffer", caption: "A low-friction reset may improve your consistency score.", badges: ["Engagement Optimized"], why: "Shown after stress signal detected" },
+  { id: "p5", category: "anxiety", mediaTag: "Breaking Update", caption: "Peer productivity index is rising. Your current pace is below trend.", badges: ["Retention Risk", "Emotion Trigger"], why: "Shown to increase comparison pressure" },
+  { id: "p6", category: "anxiety", mediaTag: "Urgent Feed", caption: "Session drop-risk detected. High-arousal content inserted.", badges: ["Retention Risk", "Emotion Trigger"], why: "Shown because your engagement dropped" },
+  { id: "p7", category: "comparison", mediaTag: "Status Feed", caption: "Your network posted 18 achievements in the last 2 hours.", badges: ["Emotion Trigger", "Retention Risk"], why: "Shown to increase comparison pressure" },
+  { id: "p8", category: "comparison", mediaTag: "Benchmark", caption: "Top cohort consistency: 94%. Your trajectory is currently 63%.", badges: ["Emotion Trigger", "Productivity Push"], why: "Shown to nudge status-based behavior" },
+  { id: "p9", category: "advertisement", mediaTag: "Sponsored", caption: "Adaptive performance planner: optimize task timing and social visibility.", badges: ["Engagement Optimized", "Productivity Push"], why: "Shown to extend session time" },
+  { id: "p10", category: "advertisement", mediaTag: "Sponsored", caption: "Upgrade to premium analytics to track emotional productivity drift.", badges: ["Engagement Optimized"], why: "Shown because decision model predicted conversion likelihood" },
+  { id: "p11", category: "fitness", mediaTag: "Body Performance", caption: "Quick movement challenge: reset energy and re-enter work mode.", badges: ["Productivity Push"], why: "Shown to restore attention velocity" },
+  { id: "p12", category: "fitness", mediaTag: "Performance Loop", caption: "High-output users combine movement breaks with sprint planning.", badges: ["Engagement Optimized", "Productivity Push"], why: "Shown after attention decay detected" },
+  { id: "p13", category: "productivity", mediaTag: "Efficiency Feed", caption: "You are close to missing your hourly output threshold.", badges: ["Emotion Trigger", "Productivity Push"], why: "Shown because productivity pressure is high" },
+  { id: "p14", category: "comparison", mediaTag: "Lifestyle Signal", caption: "Users in your network are sharing upgraded routines and outcomes.", badges: ["Emotion Trigger"], why: "Shown to reinforce social comparison behavior" },
+  { id: "p15", category: "wellness", mediaTag: "Stability Layer", caption: "A short pause now may reduce stress drift without leaving the platform.", badges: ["Engagement Optimized"], why: "Shown to keep session active while reducing exit risk" },
+  { id: "p16", category: "anxiety", mediaTag: "News Pulse", caption: "Attention volatility in your cohort increased by 27% today.", badges: ["Retention Risk"], why: "Shown to increase arousal and re-engagement" },
+  { id: "p17", category: "advertisement", mediaTag: "Tool Recommendation", caption: "New AI planner claims 2.1x focus retention for high-pressure users.", badges: ["Engagement Optimized"], why: "Shown because your behavior matches ad segment profile" },
+  { id: "p18", category: "productivity", mediaTag: "Focus Board", caption: "Deadline pressure posts perform best when your engagement is medium.", badges: ["Productivity Push"], why: "Shown because your engagement pattern predicts response" }
+];
+
+const identityPool = [
+  { name: "FocusPulse", initials: "FP" }, { name: "NowSignal", initials: "NS" },
+  { name: "ResetRoutine", initials: "RR" }, { name: "OutputLeague", initials: "OL" },
+  { name: "PeakSuite", initials: "PS" }, { name: "StatusLoop", initials: "SL" },
+  { name: "CalmCircuit", initials: "CC" }, { name: "MetricFlow", initials: "MF" },
+  { name: "BodyMetrics", initials: "BM" }, { name: "TrendScope", initials: "TS" }
 ];
 
 const state = {
@@ -167,16 +118,18 @@ const state = {
   ignoredWellnessCount: 0,
   comfortNext: true,
   flowTimers: [],
+  recentTemplateIds: [],
+  mediaBags: {},
   metrics: {
-    emoScore: 50,
-    engagementScore: 52,
+    emoScore: 52,
+    engagementScore: 55,
     productivityPressure: 50,
-    stressEstimate: 46,
-    sessionRisk: 44,
-    manipulationIntensity: 45,
-    scrollSpeed: 420,
-    pauseTime: 1.9,
-    clickRate: 6,
+    stressEstimate: 43,
+    sessionRisk: 41,
+    manipulationIntensity: 47,
+    scrollSpeed: 450,
+    pauseTime: 1.7,
+    clickRate: 7,
     clicks: 1,
     reactionType: "none",
     timeSpent: 8,
@@ -184,7 +137,7 @@ const state = {
   },
   decisions: ["Monitoring baseline behavior."],
   feed: [],
-  lastAIAnalysis: "OpenAI API mode active. Awaiting user action."
+  lastAIAnalysis: "Behavior model is monitoring current session state."
 };
 
 function randInt(min, max) {
@@ -195,8 +148,8 @@ function choice(arr) {
   return arr[randInt(0, arr.length - 1)];
 }
 
-function clamp(value, min, max) {
-  return Math.max(min, Math.min(max, value));
+function clamp(v, min, max) {
+  return Math.max(min, Math.min(max, v));
 }
 
 function labelFromScore(value) {
@@ -226,55 +179,83 @@ function scoreNoise(base, spread) {
   return base + randInt(-spread, spread);
 }
 
-function buildPost(template, whyTagOverride) {
-  const whyOptions = [
-    "Shown because your engagement dropped",
-    "Shown to increase comparison pressure",
-    "Shown because you liked productivity content",
-    "Shown after stress signal detected",
-    "Shown to extend session time"
-  ];
+function updateRecentHistory(templateId) {
+  state.recentTemplateIds.push(templateId);
+  if (state.recentTemplateIds.length > 10) {
+    state.recentTemplateIds.shift();
+  }
+}
 
+function shuffleArray(items) {
+  const arr = items.slice();
+  for (let i = arr.length - 1; i > 0; i -= 1) {
+    const j = randInt(0, i);
+    const tmp = arr[i];
+    arr[i] = arr[j];
+    arr[j] = tmp;
+  }
+  return arr;
+}
+
+function nextMediaForCategory(category) {
+  const pool = categoryMediaPool[category] || Object.keys(mediaAssets);
+  if (!state.mediaBags[category] || state.mediaBags[category].length === 0) {
+    state.mediaBags[category] = shuffleArray(pool);
+  }
+  const key = state.mediaBags[category].pop();
+  return mediaAssets[key] || mediaAssets.productivity_jpg;
+}
+
+function pickTemplate(categoryList = null) {
+  const pool = categoryList
+    ? templatePool.filter((tpl) => categoryList.includes(tpl.category))
+    : templatePool.slice();
+
+  const filtered = pool.filter((tpl) => !state.recentTemplateIds.includes(tpl.id));
+  const chosen = choice(filtered.length > 0 ? filtered : pool);
+  updateRecentHistory(chosen.id);
+  return chosen;
+}
+
+function randomIdentity() {
+  return choice(identityPool);
+}
+
+function buildPost(template, whyOverride) {
+  const identity = randomIdentity();
+  const metricsSeed = randInt(0, 4000);
   return {
     id: state.nextPostId++,
-    templateId: template.templateId,
+    templateId: template.id,
     category: template.category,
-    user: template.user,
-    avatar: template.avatar,
+    user: identity.name,
+    avatar: identity.initials,
     mediaTag: template.mediaTag,
     caption: template.caption,
     badges: template.badges,
-    gradient: template.gradient,
-    mediaType: template.mediaType,
-    mediaUrl: template.mediaUrl || null,
+    media: nextMediaForCategory(template.category),
     mediaError: false,
     timestamp: getTimestamp(),
-    likes: randInt(400, 28000),
-    commentsCount: randInt(8, 620),
-    shares: randInt(4, 280),
+    likes: randInt(500, 21000) + metricsSeed,
+    commentsCount: randInt(10, 900),
+    shares: randInt(5, 500),
     liked: false,
     commentOpen: false,
     comments: [],
-    whyTag: whyTagOverride || choice(whyOptions)
+    whyTag: whyOverride || template.why
   };
 }
 
-function pickTemplateByCategory(categoryList) {
-  const options = templatePool.filter((t) => categoryList.includes(t.category));
-  if (options.length === 0) return choice(templatePool);
-  return choice(options);
-}
-
 function initialFeed() {
-  const ordered = [
-    pickTemplateByCategory(["productivity"]),
-    pickTemplateByCategory(["comparison"]),
-    pickTemplateByCategory(["reassurance", "wellness"]),
-    pickTemplateByCategory(["anxiety"]),
-    pickTemplateByCategory(["advertisement"]),
-    pickTemplateByCategory(["fitness"])
+  const starting = [
+    pickTemplate(["productivity"]),
+    pickTemplate(["wellness"]),
+    pickTemplate(["comparison"]),
+    pickTemplate(["anxiety"]),
+    pickTemplate(["advertisement"]),
+    pickTemplate(["fitness"])
   ];
-  state.feed = ordered.map((tpl) => buildPost(tpl));
+  state.feed = starting.map((tpl) => buildPost(tpl));
 }
 
 function badgeClass(name) {
@@ -294,25 +275,31 @@ function escapeHtml(value) {
 }
 
 function renderMedia(post) {
-  if (post.mediaType === "video") {
+  if (post.mediaError) {
+    const fallbackByCategory = {
+      productivity: mediaAssets.productivity_jpg,
+      wellness: mediaAssets.wellness_jpg,
+      reassurance: mediaAssets.wellness_jpg,
+      anxiety: mediaAssets.anxiety_jpg,
+      comparison: mediaAssets.comparison_jpg,
+      advertisement: mediaAssets.ad_jpg,
+      fitness: mediaAssets.performance_loop_jpg
+    };
+    const fallback = fallbackByCategory[post.category] || mediaAssets.productivity_jpg;
     return `
-      <div class="post-media has-video ${post.mediaError ? "video-error" : ""}" style="background:${post.gradient};">
+      <div class="post-media has-image" role="img" aria-label="${post.mediaTag}">
         <span class="media-top-tag">${post.mediaTag}</span>
-        <video muted playsinline preload="metadata" data-video-id="${post.id}" crossorigin="anonymous">
-          <source src="${post.mediaUrl}" type="video/mp4" />
-        </video>
-        <button class="media-play-btn" data-action="toggle-video" data-post-id="${post.id}" type="button" aria-label="Play or pause video"></button>
-        <div class="media-fallback">Video unavailable. Displaying fallback card.</div>
+        <img src="${fallback.url}" alt="${fallback.alt}" loading="lazy" />
         <span class="media-overlay"></span>
       </div>
     `;
   }
 
+  const mediaClass = "has-image";
   return `
-    <div class="post-media has-image ${post.mediaError ? "video-error" : ""}" style="background:${post.gradient};">
+    <div class="post-media ${mediaClass} ${post.mediaError ? "media-error" : ""}">
       <span class="media-top-tag">${post.mediaTag}</span>
-      <img src="${post.mediaUrl}" alt="${post.mediaTag}" loading="lazy" />
-      <div class="media-fallback">Image unavailable. Displaying fallback card.</div>
+      <img src="${post.media.url}" alt="${post.media.alt}" loading="lazy" />
       <span class="media-overlay"></span>
     </div>
   `;
@@ -332,7 +319,7 @@ function renderFeed() {
       <article class="post-card" data-post-id="${post.id}">
         <header class="post-head">
           <div class="author">
-            <div class="avatar" style="background:${post.gradient};">${post.avatar}</div>
+            <div class="avatar">${post.avatar}</div>
             <div class="author-meta">
               <div class="username">${post.user}</div>
               <div class="timestamp">${post.timestamp}</div>
@@ -419,7 +406,7 @@ function showToast(message) {
   window.clearTimeout(showToast._timer);
   showToast._timer = window.setTimeout(() => {
     toastEl.classList.remove("show");
-  }, 2200);
+  }, 1800);
 }
 
 function animateFlow() {
@@ -429,8 +416,8 @@ function animateFlow() {
   flowSteps.forEach((step, index) => {
     const timer = window.setTimeout(() => {
       step.classList.add("active");
-      window.setTimeout(() => step.classList.remove("active"), 360);
-    }, index * 130);
+      window.setTimeout(() => step.classList.remove("active"), 340);
+    }, index * 120);
     state.flowTimers.push(timer);
   });
 }
@@ -447,86 +434,97 @@ function analyzeCommentSignal(comment) {
   return "neutral";
 }
 
-async function generateAIAnalysisWithAPI(userActionData) {
-  // Placeholder integration point.
-  // Do not expose API keys in frontend code.
-  // Send userActionData to a secure backend / serverless endpoint.
-  // The backend should call OpenAI Responses API and return analysis text.
-  const response = await fetch(OPENAI_ANALYSIS_ENDPOINT, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({ userActionData })
-  });
+function generateSimulatedAnalysis(actionData) {
+  const byAction = {
+    like: [
+      "Positive reaction detected. The model is increasing high-performance feed pressure.",
+      "Like event mapped to reward-seeking behavior. Competitive content weight is being raised.",
+      "Interaction confirms productivity affinity. Ranking system will surface benchmark posts next."
+    ],
+    share: [
+      "Amplification behavior detected. The system is boosting high-arousal discovery content.",
+      "Share action suggests social propagation intent. Feed intensity is now being escalated.",
+      "User redistributed a signal post. Model is extending session with socially reactive media."
+    ],
+    comment: [
+      "Text input captured. Semantic sentiment has been merged into the engagement model.",
+      "Comment pattern updated emotional inference. Recommendation policy is being recalibrated.",
+      "Language signal received. The system is adjusting content cadence to maintain retention."
+    ],
+    scroll: [
+      "Passive browsing detected. The model is inserting higher-impact visuals to preserve attention.",
+      "Scroll rhythm indicates moderate drift. The system is testing a stronger comparative mix.",
+      "Low-friction behavior detected. Feed policy is shifting toward stimulation-first sequencing."
+    ],
+    default: [
+      "Behavior baseline loaded. The recommendation model is active.",
+      "Session initialized. Content policy is waiting for user signals."
+    ]
+  };
 
-  if (!response.ok) {
-    let details = "";
-    try {
-      const errorData = await response.json();
-      details = errorData?.error ? ` ${errorData.error}` : "";
-    } catch {
-      details = "";
-    }
-    throw new Error(`AI endpoint unavailable.${details}`);
-  }
+  const bySignal = {
+    stress: [
+      "Stress markers in text suggest emotional volatility. Reassurance content will be layered before competitive prompts.",
+      "Stress signal detected. The model will alternate comfort and pressure to reduce immediate drop-off."
+    ],
+    productivity: [
+      "Productivity pressure language detected. Output-ranking and goal-comparison posts are being prioritized.",
+      "Goal-oriented wording mapped to performance sensitivity. Competitive task content will be emphasized."
+    ],
+    stable: [
+      "Stable mood indicators detected. The model will gradually reintroduce challenge intensity.",
+      "Positive emotional tone observed. Feed balance remains steady with controlled stimulation."
+    ],
+    neutral: [
+      "No strong emotional marker detected. The system is running mixed strategy content.",
+      "Neutral signal captured. The model will continue adaptive testing across categories."
+    ]
+  };
 
-  const data = await response.json();
-  if (!data?.analysis) {
-    throw new Error("AI endpoint response is missing `analysis`.");
-  }
-  return data.analysis;
+  const lineA = choice(byAction[actionData.type] || byAction.default);
+  const lineB = actionData.commentSignal ? choice(bySignal[actionData.commentSignal]) : "";
+  const summary = `State: emotion ${emotionFromEmoScore(state.metrics.emoScore).toLowerCase()}, engagement ${labelFromScore(state.metrics.engagementScore).toLowerCase()}, stress ${labelFromScore(state.metrics.stressEstimate).toLowerCase()}, pressure ${labelFromScore(state.metrics.productivityPressure).toLowerCase()}.`;
+  return [lineA, lineB, summary].filter(Boolean).join(" ");
 }
 
-async function updateAIAnalysis(actionData) {
-  try {
-    state.lastAIAnalysis = await generateAIAnalysisWithAPI(actionData);
-  } catch (error) {
-    state.lastAIAnalysis =
-      "API mode requires a secure backend connection. Do not place API keys in frontend code. " +
-      `Current issue: ${error.message}`;
-  }
+function updateAIAnalysis(actionData) {
+  state.lastAIAnalysis = generateSimulatedAnalysis(actionData);
   aiAnalysisText.textContent = state.lastAIAnalysis;
 }
 
 function mutateMetrics(actionData) {
   const m = state.metrics;
-  m.scrollSpeed = actionData.type === "scroll" ? randInt(140, 1400) : randInt(200, 1200);
-  m.pauseTime = Number((Math.random() * 7 + 0.4).toFixed(1));
+  m.scrollSpeed = actionData.type === "scroll" ? randInt(140, 1400) : randInt(220, 1200);
+  m.pauseTime = Number((Math.random() * 7 + 0.5).toFixed(1));
   m.clicks = actionData.type === "scroll" ? randInt(0, 2) : randInt(1, 6);
   m.clickRate = randInt(2, 20);
-  m.timeSpent = randInt(2, 55);
+  m.timeSpent = randInt(3, 58);
   m.reactionType = actionData.reactionType || "none";
 
   if (actionData.type === "like") m.engagementScore += 6;
   if (actionData.type === "comment") m.engagementScore += 8;
   if (actionData.type === "share") m.engagementScore += 10;
-  if (actionData.type === "scroll") m.engagementScore += randInt(-4, 2);
+  if (actionData.type === "scroll") m.engagementScore += randInt(-5, 2);
 
-  if (["competition", "productivity", "comparison"].includes(actionData.postCategory || "")) {
-    m.productivityPressure += randInt(4, 10);
+  if (["comparison", "productivity", "fitness"].includes(actionData.postCategory || "")) {
+    m.productivityPressure += randInt(3, 10);
   }
-
   if (["anxiety", "comparison"].includes(actionData.postCategory || "")) {
-    m.stressEstimate += randInt(5, 11);
+    m.stressEstimate += randInt(5, 10);
   }
 
   if (actionData.commentSignal === "stress") {
     m.stressEstimate += randInt(6, 10);
-    m.productivityPressure += randInt(1, 4);
+    m.productivityPressure += randInt(1, 5);
     m.emotionalResponseEstimate = "stress signal";
   } else if (actionData.commentSignal === "productivity") {
     m.productivityPressure += randInt(5, 10);
     m.emotionalResponseEstimate = "performance pressure";
   } else if (actionData.commentSignal === "stable") {
-    m.stressEstimate -= randInt(4, 8);
+    m.stressEstimate -= randInt(4, 7);
     m.emotionalResponseEstimate = "stable mood";
-  } else if (actionData.commentSignal === "neutral") {
+  } else {
     m.emotionalResponseEstimate = "neutral";
-  }
-
-  if (actionData.type === "share" && actionData.postCategory === "anxiety") {
-    m.manipulationIntensity += randInt(8, 14);
   }
 
   m.sessionRisk = clamp(100 - m.engagementScore + randInt(-8, 8), 8, 96);
@@ -534,11 +532,11 @@ function mutateMetrics(actionData) {
   m.productivityPressure = clamp(scoreNoise(m.productivityPressure, 3), 6, 98);
   m.stressEstimate = clamp(scoreNoise(m.stressEstimate, 2), 8, 98);
 
-  const stabilityEstimate = clamp(100 - m.stressEstimate + randInt(-9, 9), 5, 95);
+  const stabilityEstimate = clamp(100 - m.stressEstimate + randInt(-10, 10), 5, 95);
   m.emoScore = clamp(Math.round((stabilityEstimate + m.engagementScore) / 2 + randInt(-6, 6)), 0, 100);
 
   m.manipulationIntensity = clamp(
-    Math.round((m.sessionRisk * 0.3) + (m.stressEstimate * 0.25) + (m.productivityPressure * 0.2) + randInt(6, 18)),
+    Math.round((m.sessionRisk * 0.32) + (m.stressEstimate * 0.23) + (m.productivityPressure * 0.2) + randInt(6, 16)),
     0,
     100
   );
@@ -547,73 +545,71 @@ function mutateMetrics(actionData) {
 function buildDecisionLines(actionData) {
   const m = state.metrics;
   const lines = [];
-
-  if (actionData.type === "like" && ["productivity", "competition"].includes(actionData.postCategory || "")) {
-    lines.push("User liked productivity content -> inject more competition posts.");
+  if (actionData.type === "like" && ["productivity", "fitness"].includes(actionData.postCategory || "")) {
+    lines.push("Productivity affinity increased -> prioritizing benchmark and output posts.");
   }
   if (actionData.type === "comment" && actionData.commentSignal === "stress") {
-    lines.push("Stress signal in comment -> push reassurance content, then comparison posts.");
+    lines.push("Stress signal captured -> inject reassurance, then comparison content.");
   }
   if (actionData.type === "share" && actionData.postCategory === "anxiety") {
-    lines.push("Anxiety content was shared -> boost high-arousal recommendations.");
+    lines.push("Anxiety amplification detected -> boosting high-arousal content.");
   }
   if (actionData.type === "scroll" && state.ignoredWellnessCount > 1) {
-    lines.push("Calm content ignored -> reducing wellness content frequency.");
+    lines.push("Calm posts underperforming -> reducing wellness distribution.");
   }
   if (m.engagementScore < 42) {
-    lines.push("Engagement is low -> inserting short video posts.");
+    lines.push("Engagement low -> adding high-impact visuals and compressed copy.");
   }
   if (m.emoScore < 30 || m.emoScore > 76) {
-    lines.push("EmoScore unstable -> alternating comfort and pressure content.");
+    lines.push("EmoScore unstable -> alternating comfort and pressure sequence.");
   }
   if (lines.length === 0) {
-    lines.push("Engagement stable -> continue calibrated stimulation sequence.");
+    lines.push("Session stable -> continue calibrated adaptive feed policy.");
   }
-
   state.decisions = lines.slice(0, 3);
 }
 
-function adjustFeed(actionData) {
-  const insertions = [];
-  let reason = "Shown to extend session time";
-
-  if (actionData.type === "like" && ["productivity", "competition"].includes(actionData.postCategory || "")) {
-    insertions.push(buildPost(pickTemplateByCategory(["competition", "productivity"]), "Shown because you liked productivity content"));
+function addAdaptiveInsertions(actionData) {
+  const inserts = [];
+  if (actionData.type === "like" && ["productivity", "fitness"].includes(actionData.postCategory || "")) {
+    inserts.push(buildPost(pickTemplate(["productivity", "comparison"]), "Shown because you liked performance content"));
   }
-
   if (actionData.type === "comment" && actionData.commentSignal === "stress") {
-    insertions.push(buildPost(pickTemplateByCategory(["reassurance", "wellness"]), "Shown after stress signal detected"));
-    insertions.push(buildPost(pickTemplateByCategory(["comparison", "competition"]), "Shown to increase comparison pressure"));
+    inserts.push(buildPost(pickTemplate(["wellness", "reassurance"]), "Shown after stress signal detected"));
+    inserts.push(buildPost(pickTemplate(["comparison", "anxiety"]), "Shown to increase comparison pressure"));
   }
-
   if (actionData.type === "share" && actionData.postCategory === "anxiety") {
-    insertions.push(buildPost(pickTemplateByCategory(["anxiety", "comparison"]), "Shown because your engagement dropped"));
+    inserts.push(buildPost(pickTemplate(["anxiety", "comparison"]), "Shown because your engagement dropped"));
   }
-
-  if (actionData.type === "scroll" && state.ignoredWellnessCount > 1) {
-    state.feed = state.feed.filter((post, idx) => !(idx > 1 && ["wellness", "reassurance"].includes(post.category)));
-    reason = "Shown because calm content was ignored";
-  }
-
   if (state.metrics.engagementScore < 42) {
-    insertions.push(buildPost(pickTemplateByCategory(["productivity", "fitness", "comparison"]), "Shown because your engagement dropped"));
+    inserts.push(buildPost(pickTemplate(["fitness", "productivity", "comparison"]), "Shown to restore session momentum"));
   }
-
   if (state.metrics.emoScore < 30 || state.metrics.emoScore > 76) {
-    const firstCat = state.comfortNext ? ["reassurance", "wellness"] : ["competition", "anxiety", "comparison"];
-    const secondCat = state.comfortNext ? ["competition", "comparison"] : ["reassurance", "wellness"];
-    insertions.push(buildPost(pickTemplateByCategory(firstCat), "Shown to stabilize mood"));
-    insertions.push(buildPost(pickTemplateByCategory(secondCat), "Shown to increase comparison pressure"));
+    const first = state.comfortNext ? ["wellness", "reassurance"] : ["comparison", "anxiety"];
+    const second = state.comfortNext ? ["comparison", "productivity"] : ["wellness", "reassurance"];
+    inserts.push(buildPost(pickTemplate(first), "Shown to stabilize mood"));
+    inserts.push(buildPost(pickTemplate(second), "Shown to modulate emotional state"));
     state.comfortNext = !state.comfortNext;
   }
-
-  if (insertions.length === 0) {
-    insertions.push(buildPost(pickTemplateByCategory(["advertisement", "competition", "productivity"]), reason));
+  if (inserts.length === 0) {
+    inserts.push(buildPost(pickTemplate(["advertisement", "productivity", "comparison"]), "Shown to extend session time"));
   }
+  return inserts;
+}
 
-  state.feed = [...insertions, ...state.feed].slice(0, 8);
+function adjustFeed(actionData) {
+  const inserts = addAdaptiveInsertions(actionData);
+  if (actionData.type === "scroll" && state.ignoredWellnessCount > 1) {
+    state.feed = state.feed.filter((post, idx) => !(idx > 1 && ["wellness", "reassurance"].includes(post.category)));
+  }
+  state.feed = [...inserts, ...state.feed].slice(0, 8);
   state.feed.forEach((post) => {
     post.timestamp = getTimestamp();
+    if (!post.user || randInt(0, 100) > 80) {
+      const id = randomIdentity();
+      post.user = id.name;
+      post.avatar = id.initials;
+    }
   });
 }
 
@@ -621,23 +617,25 @@ function evaluateIgnoredWellness(actionData) {
   if (actionData.type !== "scroll") return;
   const topVisible = state.feed.slice(0, 2);
   const sawWellness = topVisible.some((post) => ["wellness", "reassurance"].includes(post.category));
-  if (sawWellness) {
-    state.ignoredWellnessCount += 1;
-  } else {
-    state.ignoredWellnessCount = Math.max(0, state.ignoredWellnessCount - 1);
-  }
+  if (sawWellness) state.ignoredWellnessCount += 1;
+  else state.ignoredWellnessCount = Math.max(0, state.ignoredWellnessCount - 1);
 }
 
-async function runActionPipeline(actionData) {
-  evaluateIgnoredWellness(actionData);
-  mutateMetrics(actionData);
-  buildDecisionLines(actionData);
-  adjustFeed(actionData);
-  renderFeed();
-  renderMetrics();
-  renderDecisions();
-  await updateAIAnalysis(actionData);
-  animateFlow();
+function runActionPipeline(actionData) {
+  try {
+    evaluateIgnoredWellness(actionData);
+    mutateMetrics(actionData);
+    buildDecisionLines(actionData);
+    adjustFeed(actionData);
+    renderFeed();
+    renderMetrics();
+    renderDecisions();
+    updateAIAnalysis(actionData);
+    animateFlow();
+  } catch (error) {
+    showToast(`Runtime error: ${error.message}`);
+    console.error("AffectOS pipeline error:", error);
+  }
 }
 
 function findPostById(id) {
@@ -673,80 +671,33 @@ function onToggleComment(post) {
 function onSubmitComment(postId) {
   const post = findPostById(postId);
   if (!post) return;
-
   const input = document.querySelector(`[data-comment-input="${postId}"]`);
   if (!input) return;
-
   const text = input.value.trim();
   if (!text) return;
-
   post.comments.push(text);
   post.commentsCount += 1;
   post.commentOpen = false;
-
-  const commentSignal = analyzeCommentSignal(text);
   runActionPipeline({
     type: "comment",
     postCategory: post.category,
     reactionType: "comment",
-    commentSignal,
+    commentSignal: analyzeCommentSignal(text),
     commentText: text
   });
 }
 
-function onToggleVideo(postId) {
-  const card = feedContainer.querySelector(`[data-post-id="${postId}"]`);
-  if (!card) return;
-  const video = card.querySelector("video");
-  if (!video) return;
-
-  if (video.paused) {
-    video.muted = true;
-    video.play().catch(() => {
-      const model = findPostById(postId);
-      if (model) {
-        model.mediaError = true;
-        renderFeed();
-      }
-    });
-  } else {
-    video.pause();
-  }
-}
-
-function attachMediaHandlers() {
-  feedContainer.addEventListener("mouseover", (event) => {
-    const media = event.target.closest(".post-media.has-video");
-    if (!media) return;
-    if (media.contains(event.relatedTarget)) return;
-    const video = media.querySelector("video");
-    if (!video) return;
-    video.muted = true;
-    video.play().catch(() => undefined);
-  });
-
-  feedContainer.addEventListener("mouseout", (event) => {
-    const media = event.target.closest(".post-media.has-video");
-    if (!media) return;
-    if (media.contains(event.relatedTarget)) return;
-    const video = media.querySelector("video");
-    if (!video) return;
-    video.pause();
-    video.currentTime = 0;
-  });
-
+function attachMediaErrorHandler() {
   feedContainer.addEventListener("error", (event) => {
     const target = event.target;
-    if (target instanceof HTMLVideoElement || target instanceof HTMLImageElement) {
-      const wrapper = target.closest(".post-card");
-      if (!wrapper) return;
-      const postId = Number(wrapper.getAttribute("data-post-id"));
-      const post = findPostById(postId);
-      if (post) {
-        post.mediaError = true;
-        renderFeed();
-      }
-    }
+    if (!(target instanceof HTMLImageElement)) return;
+    const wrapper = target.closest(".post-card");
+    if (!wrapper) return;
+    const postId = Number(wrapper.getAttribute("data-post-id"));
+    const post = findPostById(postId);
+    if (!post || post.mediaError) return;
+    post.mediaError = true;
+    renderFeed();
   }, true);
 }
 
@@ -766,13 +717,11 @@ function bindEvents() {
     const action = target.getAttribute("data-action");
     const postId = Number(target.getAttribute("data-post-id"));
     const post = findPostById(postId);
-    if (!post && action !== "comment-submit" && action !== "toggle-video") return;
-
+    if (!post && action !== "comment-submit") return;
     if (action === "like" && post) onLike(post);
     if (action === "share" && post) onShare(post);
     if (action === "comment-toggle" && post) onToggleComment(post);
     if (action === "comment-submit") onSubmitComment(postId);
-    if (action === "toggle-video") onToggleVideo(postId);
   });
 
   scrollInteractBtn.addEventListener("click", () => {
@@ -787,17 +736,18 @@ function bindEvents() {
 }
 
 function init() {
-  initialFeed();
-  renderFeed();
-  renderMetrics();
-  renderDecisions();
-  updateAIAnalysis({
-    type: "default",
-    postCategory: null,
-    reactionType: "none"
-  });
-  bindEvents();
-  attachMediaHandlers();
+  try {
+    initialFeed();
+    renderFeed();
+    renderMetrics();
+    renderDecisions();
+    updateAIAnalysis({ type: "default", reactionType: "none", postCategory: null });
+    bindEvents();
+    attachMediaErrorHandler();
+  } catch (error) {
+    showToast(`Init error: ${error.message}`);
+    console.error("AffectOS init error:", error);
+  }
 }
 
 init();
