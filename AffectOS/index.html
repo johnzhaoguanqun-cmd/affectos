@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AffectOS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Sora:wght@500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <main id="app" class="app normal-mode">
+    <header class="topbar">
+      <div class="brand-wrap">
+        <h1 class="brand">AffectOS</h1>
+        <p class="brand-sub">Behavioral Feed Orchestration Demo</p>
+      </div>
+      <div class="topbar-actions">
+        <span id="runtimeBadge" class="badge-chip">User View Active</span>
+        <button id="revealBtn" class="ghost-btn" type="button">Reveal Mechanism</button>
+      </div>
+    </header>
+
+    <section class="panel flow-panel">
+      <div class="panel-title-row">
+        <h2 class="panel-title">Mechanism Flow</h2>
+      </div>
+      <ol id="mechanismFlow" class="flow-list">
+        <li class="flow-step"><span class="flow-icon">UA</span><span>User Action</span></li>
+        <li class="flow-step"><span class="flow-icon">DC</span><span>Data Capture</span></li>
+        <li class="flow-step"><span class="flow-icon">AI</span><span>AI Interpretation</span></li>
+        <li class="flow-step"><span class="flow-icon">SD</span><span>System Decision</span></li>
+        <li class="flow-step"><span class="flow-icon">FA</span><span>Feed Adjustment</span></li>
+        <li class="flow-step"><span class="flow-icon">BR</span><span>Behavior Reinforcement</span></li>
+      </ol>
+    </section>
+
+    <section class="layout">
+      <section class="panel feed-panel">
+        <div class="panel-title-row feed-head">
+          <h2 class="panel-title">Main Feed</h2>
+          <div class="head-controls">
+            <button id="scrollInteractBtn" class="primary-btn" type="button">Scroll / Interact</button>
+            <span id="viewModeLabel" class="subtle-text">Normal View</span>
+          </div>
+        </div>
+        <div id="feedContainer" class="feed-grid"></div>
+      </section>
+
+      <aside class="right-column">
+        <section class="panel system-only">
+          <div class="panel-title-row">
+            <h2 class="panel-title">Live Data Capture</h2>
+          </div>
+          <div id="dataCaptureList" class="metric-list"></div>
+        </section>
+
+        <section class="panel">
+          <div class="panel-title-row">
+            <h2 class="panel-title">System Variables</h2>
+          </div>
+          <div class="metric-stack">
+            <div class="metric-row">
+              <div class="metric-label">EmoScore</div>
+              <div class="metric-value"><span id="emoScoreValue">50</span>/100</div>
+            </div>
+            <div class="meter"><span id="emoScoreBar"></span></div>
+
+            <div class="metric-row">
+              <div class="metric-label">Emotion Level</div>
+              <div id="emotionValue" class="metric-pill">NEUTRAL</div>
+            </div>
+            <div class="metric-row">
+              <div class="metric-label">Engagement</div>
+              <div id="engagementValue" class="metric-pill">MEDIUM</div>
+            </div>
+            <div class="metric-row">
+              <div class="metric-label">Productivity Pressure</div>
+              <div id="pressureValue" class="metric-pill">MEDIUM</div>
+            </div>
+            <div class="metric-row">
+              <div class="metric-label">Stress Estimate</div>
+              <div id="stressValue" class="metric-pill">MEDIUM</div>
+            </div>
+            <div class="metric-row">
+              <div class="metric-label">Session Risk</div>
+              <div id="riskValue" class="metric-pill">MEDIUM</div>
+            </div>
+            <div class="metric-row">
+              <div class="metric-label">Manipulation Intensity</div>
+              <div class="metric-value"><span id="intensityValue">45</span>/100</div>
+            </div>
+            <div class="meter"><span id="intensityBar"></span></div>
+          </div>
+        </section>
+
+        <section class="panel system-only">
+          <div class="panel-title-row">
+            <h2 class="panel-title">System Decision</h2>
+          </div>
+          <ul id="decisionList" class="decision-list"></ul>
+        </section>
+
+        <section class="panel">
+          <div class="panel-title-row">
+            <h2 class="panel-title">AI Interpretation Layer</h2>
+          </div>
+          <div class="api-only-label">OpenAI API Response</div>
+          <p id="aiAnalysisText" class="analysis-box"></p>
+        </section>
+
+        <section class="panel system-only">
+          <div class="panel-title-row">
+            <h2 class="panel-title">Feedback Loop</h2>
+          </div>
+          <div class="loop-diagram">
+            <span class="loop-node n1">Content</span>
+            <span class="loop-node n2">Emotion</span>
+            <span class="loop-node n3">Behavior</span>
+            <span class="loop-node n4">Data</span>
+            <span class="loop-node n5">Algorithm</span>
+            <span class="loop-node n6">More Content</span>
+          </div>
+        </section>
+      </aside>
+    </section>
+
+    <footer class="explain">
+      AffectOS is a speculative interface that shows how platforms can turn emotion into measurable data.
+      The system does not simply respond to users. It reads behavior, predicts emotional states, and adjusts
+      content to shape what users feel, notice, and do.
+    </footer>
+  </main>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="./app.js"></script>
+</body>
+</html>
