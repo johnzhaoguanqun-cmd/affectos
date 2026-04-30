@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Sora:wght@500;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="./styles.css?v=20260426-2" />
+  <link rel="stylesheet" href="./styles.css?v=20260429-1" />
 </head>
 <body>
   <main id="app" class="app normal-mode">
@@ -18,21 +18,29 @@
       </div>
       <div class="topbar-actions">
         <span id="runtimeBadge" class="badge-chip">User View Active</span>
-        <button id="revealBtn" class="ghost-btn" type="button">Reveal Mechanism</button>
+        <button id="revealBtn" class="ghost-btn" type="button">Show Manipulation</button>
       </div>
     </header>
+
+    <section class="panel algorithm-panel">
+      <h2 class="panel-title">Algorithm Explanation</h2>
+      <p class="algorithm-text">
+        Every interaction teaches the system what emotion keeps you engaged. The platform does not ask what you need.
+        It repeats what you react to.
+      </p>
+    </section>
 
     <section class="panel flow-panel">
       <div class="panel-title-row">
         <h2 class="panel-title">Mechanism Flow</h2>
       </div>
       <ol id="mechanismFlow" class="flow-list">
-        <li class="flow-step"><span class="flow-icon">UA</span><span>User Action</span></li>
-        <li class="flow-step"><span class="flow-icon">DC</span><span>Data Capture</span></li>
-        <li class="flow-step"><span class="flow-icon">AI</span><span>AI Interpretation</span></li>
-        <li class="flow-step"><span class="flow-icon">SD</span><span>System Decision</span></li>
-        <li class="flow-step"><span class="flow-icon">FA</span><span>Feed Adjustment</span></li>
-        <li class="flow-step"><span class="flow-icon">BR</span><span>Behavior Reinforcement</span></li>
+        <li class="flow-step"><span class="flow-icon">1</span><span>You react</span></li>
+        <li class="flow-step"><span class="flow-icon">2</span><span>System detects interest</span></li>
+        <li class="flow-step"><span class="flow-icon">3</span><span>Emotion is labeled</span></li>
+        <li class="flow-step"><span class="flow-icon">4</span><span>Feed is recalibrated</span></li>
+        <li class="flow-step"><span class="flow-icon">5</span><span>Similar posts repeat</span></li>
+        <li class="flow-step"><span class="flow-icon">6</span><span>Behavior is reinforced</span></li>
       </ol>
     </section>
 
@@ -42,13 +50,26 @@
           <h2 class="panel-title">Main Feed</h2>
           <div class="head-controls">
             <button id="scrollInteractBtn" class="primary-btn" type="button">Scroll / Interact</button>
+            <button id="resetFeedBtn" class="ghost-btn" type="button">Reset Feed</button>
             <span id="viewModeLabel" class="subtle-text">Normal View</span>
           </div>
         </div>
+
+        <div id="recalibrationBanner" class="recalibration-banner">Feed is mixed. The system is waiting for your next signal.</div>
+        <div id="neutralityState" class="neutrality-state">Your feed is currently neutral.</div>
         <div id="feedContainer" class="feed-grid"></div>
       </section>
 
       <aside class="right-column">
+        <section class="panel direction-panel">
+          <div class="panel-title-row">
+            <h2 class="panel-title">Emotional Direction</h2>
+            <span id="directionLabel" class="direction-label">Calm</span>
+          </div>
+          <div class="direction-meter"><span id="directionBar"></span></div>
+          <p id="directionText" class="direction-text">No dominant emotional push yet.</p>
+        </section>
+
         <section class="panel system-only">
           <div class="panel-title-row">
             <h2 class="panel-title">Live Data Capture</h2>
@@ -108,20 +129,6 @@
           </div>
           <p id="aiAnalysisText" class="analysis-box"></p>
         </section>
-
-        <section class="panel system-only">
-          <div class="panel-title-row">
-            <h2 class="panel-title">Feedback Loop</h2>
-          </div>
-          <div class="loop-diagram">
-            <span class="loop-node n1">Content</span>
-            <span class="loop-node n2">Emotion</span>
-            <span class="loop-node n3">Behavior</span>
-            <span class="loop-node n4">Data</span>
-            <span class="loop-node n5">Algorithm</span>
-            <span class="loop-node n6">More Content</span>
-          </div>
-        </section>
       </aside>
     </section>
 
@@ -133,6 +140,6 @@
   </main>
 
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
-  <script src="./app.js?v=20260426-2"></script>
+  <script src="./app.js?v=20260429-1"></script>
 </body>
 </html>
