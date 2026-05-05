@@ -1,4 +1,6 @@
 const appEl = document.getElementById("app");
+const introScreen = document.getElementById("introScreen");
+const startExperienceBtn = document.getElementById("startExperienceBtn");
 const feedContainer = document.getElementById("feedContainer");
 const scrollInteractBtn = document.getElementById("scrollInteractBtn");
 const resetFeedBtn = document.getElementById("resetFeedBtn");
@@ -603,6 +605,14 @@ function bindEvents() {
 
   resetFeedBtn.addEventListener("click", resetFeed);
   revealBtn.addEventListener("click", toggleSystemView);
+
+  if (startExperienceBtn) {
+    startExperienceBtn.addEventListener("click", () => {
+      introScreen?.classList.add("hidden");
+      appEl?.classList.remove("hidden");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  }
 }
 
 function init() {

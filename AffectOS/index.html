@@ -10,11 +10,34 @@
   <link rel="stylesheet" href="./styles.css?v=20260429-1" />
 </head>
 <body>
-  <main id="app" class="app normal-mode">
+  <section id="introScreen" class="intro-screen">
+    <div class="intro-card">
+      <p class="intro-kicker">Exhibition Introduction</p>
+      <h1 class="intro-title">AFFECTOS</h1>
+      <p class="intro-subtitle">Speculative Interface Installation</p>
+      <p class="intro-text">
+        <strong>AffectOS</strong> is a speculative interface that examines how contemporary social platforms convert ordinary
+        interaction into behavioral control signals. Actions such as like, comment, and share are interpreted as measurable
+        preference data rather than simple expression.
+      </p>
+      <p class="intro-text">
+        The system workflow is intentionally exposed: user reaction is captured, translated into an emotional label, and used to
+        recalibrate ranking logic. The feed then repeats adjacent content patterns, gradually reinforcing urgency, comparison,
+        productivity pressure, or reassurance until behavior appears self-directed.
+      </p>
+      <p class="intro-text">
+        In this framing, personalization is not neutral service. It is an adaptive mechanism that can shape what users notice,
+        feel, and continue doing.
+      </p>
+      <button id="startExperienceBtn" class="primary-btn intro-start-btn" type="button">Start Experience</button>
+    </div>
+  </section>
+
+  <main id="app" class="app normal-mode hidden">
     <header class="topbar">
       <div class="brand-wrap">
         <h1 class="brand">AffectOS</h1>
-        <p class="brand-sub">Behavioral Feed Orchestration Demo</p>
+        <p class="brand-sub">Speculative Interface Installation</p>
       </div>
       <div class="topbar-actions">
         <span id="runtimeBadge" class="badge-chip">User View Active</span>
@@ -25,8 +48,8 @@
     <section class="panel algorithm-panel">
       <h2 class="panel-title">Algorithm Explanation</h2>
       <p class="algorithm-text">
-        Every interaction teaches the system what emotion keeps you engaged. The platform does not ask what you need.
-        It repeats what you react to.
+        Workflow summary: interaction -> signal capture -> emotional classification -> feed recalibration -> repeated exposure ->
+        behavioral reinforcement. The system does not infer what is beneficial; it optimizes what is most likely to sustain attention.
       </p>
     </section>
 
@@ -140,6 +163,6 @@
   </main>
 
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
-  <script src="./app.js?v=20260429-1"></script>
+  <script src="./app.js?v=20260506-1"></script>
 </body>
 </html>

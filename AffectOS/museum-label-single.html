@@ -6,14 +6,14 @@
   <title>AffectOS Museum Label</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&family=Playfair+Display:ital,wght@0,500;0,700;1,500;1,600&family=Source+Serif+4:wght@400;500;600&display=swap" rel="stylesheet" />
   <style>
 :root {
   --page-bg: #f4f7fb;
   --card-bg: #ffffff;
   --line: #e3eaf2;
-  --text: #1b2c45;
-  --muted: #5f7598;
+  --text: #1f2f48;
+  --muted: #6c7f9f;
   --shadow: 0 12px 30px rgba(40, 67, 108, 0.08);
 }
 
@@ -23,7 +23,6 @@ html,
 body {
   margin: 0;
   padding: 0;
-  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   background: var(--page-bg);
   color: var(--text);
 }
@@ -36,14 +35,14 @@ body {
 }
 
 .label-shell {
-  width: min(780px, 100%);
+  width: min(800px, 100%);
   background: linear-gradient(180deg, #f9fbff 0%, #f4f7fb 100%);
   border-radius: 16px;
   border: 1px solid var(--line);
   box-shadow: var(--shadow);
-  padding: 28px;
+  padding: 30px;
   display: grid;
-  gap: 20px;
+  gap: 22px;
 }
 
 .with-panel-border {
@@ -53,6 +52,7 @@ body {
 
 .system-label {
   margin: 0;
+  font-family: "Inter", "Segoe UI", sans-serif;
   font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.14em;
@@ -60,55 +60,73 @@ body {
   text-transform: uppercase;
 }
 
+.epigraph {
+  margin: 2px 0 0;
+  font-family: "Playfair Display", Georgia, serif;
+  font-style: italic;
+  font-weight: 500;
+  text-align: center;
+  font-size: clamp(27px, 3.1vw, 40px);
+  line-height: 1.35;
+  color: #7f8897;
+}
+
 .title-block h1 {
   margin: 0;
-  font-size: clamp(32px, 5vw, 40px);
-  line-height: 1.05;
-  letter-spacing: 0.08em;
-  font-weight: 800;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(46px, 5.5vw, 64px);
+  line-height: 1.02;
+  letter-spacing: 0.01em;
+  font-weight: 700;
+  color: #142643;
 }
 
 .title-block p {
-  margin: 8px 0 0;
-  font-size: 18px;
-  color: #3f5a84;
+  margin: 10px 0 0;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 25px;
+  color: #35557f;
   font-weight: 500;
 }
 
 .meta-row {
   display: flex;
   flex-wrap: wrap;
-  gap: 20px;
-  font-size: 15px;
-  color: #486289;
+  gap: 12px;
+  align-items: center;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 16px;
+  color: #556d90;
 }
 
 .meta-row p {
   margin: 0;
 }
 
-.meta-row span {
-  font-weight: 700;
-  color: #29456d;
+.meta-row p + p::before {
+  content: "\00B7";
+  margin-right: 12px;
+  color: #8192ae;
 }
 
 .content-card {
   background: var(--card-bg);
   border: 1px solid var(--line);
   border-radius: 14px;
-  padding: 24px;
+  padding: 26px;
   box-shadow: 0 8px 20px rgba(43, 72, 115, 0.06);
 }
 
 .content-card p {
   margin: 0;
-  font-size: 17px;
-  line-height: 1.5;
-  color: #243b5f;
+  font-family: "Source Serif 4", Georgia, serif;
+  font-size: 35px;
+  line-height: 1.53;
+  color: #1f3556;
 }
 
 .content-card p + p {
-  margin-top: 14px;
+  margin-top: 16px;
 }
 
 .highlight {
@@ -116,7 +134,8 @@ body {
   border: 1px solid #c7d7f6;
   background: linear-gradient(135deg, #28d3ff 0%, #7a6bff 52%, #ff7fa1 100%);
   color: #ffffff;
-  padding: 18px 22px;
+  padding: 20px 24px;
+  font-family: "Inter", "Segoe UI", sans-serif;
   font-size: 24px;
   line-height: 1.35;
   font-weight: 700;
@@ -125,8 +144,9 @@ body {
 
 .label-footer {
   margin-top: 2px;
-  font-size: 16px;
-  color: #3d5a83;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 32px;
+  color: #304f79;
   font-weight: 600;
 }
 
@@ -153,6 +173,28 @@ body {
   }
 }
 
+@media (max-width: 900px) {
+  .content-card p {
+    font-size: 18px;
+  }
+
+  .epigraph {
+    font-size: clamp(22px, 5.3vw, 32px);
+  }
+
+  .title-block h1 {
+    font-size: clamp(38px, 10vw, 54px);
+  }
+
+  .title-block p {
+    font-size: 22px;
+  }
+
+  .label-footer {
+    font-size: 28px;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -160,25 +202,31 @@ body {
     <section class="label-shell with-panel-border">
       <p class="system-label">SYSTEM LABEL</p>
 
+      <p class="epigraph">
+        In a networked attention economy, response itself becomes a signal,
+        and signal returns as atmosphere.
+      </p>
+
       <header class="title-block">
         <h1>AFFECTOS</h1>
         <p>Behavioral Feed System</p>
       </header>
 
       <section class="meta-row" aria-label="metadata">
-        <p><span>Medium:</span> Interactive Web Interface</p>
-        <p><span>Date:</span> 2026</p>
+        <p>Student Name</p>
+        <p>2026</p>
+        <p>Interactive Web Interface</p>
       </section>
 
       <article class="content-card">
         <p>
-          AffectOS is a speculative interface that reveals how social media platforms shape user emotions and behavior.
+          Catalogued as an interface study, <em>AffectOS</em> stages the everyday grammar of platform interaction and asks how a feed learns to resemble the user it measures.
         </p>
         <p>
-          When a user clicks "like," "comment," or "share," the system interprets this as interest. It then adjusts the feed to show more similar content. Over time, this creates a feedback loop: repeated exposure reinforces emotional states such as anxiety, productivity pressure, or social comparison.
+          A tap, a pause, a share, a brief line of text: each is absorbed as preference evidence. From there, ranking systems narrow their emphasis, returning adjacent moods and familiar intensities. What appears as personalization may also operate as repetition.
         </p>
         <p>
-          The system does not respond to what users need. It amplifies what they react to.
+          Over time, this recursive arrangement can make urgency feel ordinary, comparison feel necessary, and continuation feel self-chosen. The work invites viewers to consider where expression ends and behavioral calibration begins.
         </p>
       </article>
 
